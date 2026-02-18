@@ -133,14 +133,13 @@ export default function Home() {
           </div>
         </div>
 
-        <Image 
-  src="/brand/foto-dra.jpeg" // Agregamos /brand/ antes del nombre
-  alt="Dra. Isis Marina Soto"
-  width={400} // O el tamaño que tengas configurado
-  height={400}
-  priority
-  className="rounded-full object-cover"
-/>
+        <div className="relative group">
+          <div className="absolute -inset-4 bg-gradient-to-tr from-[#9E3A4D]/10 to-transparent rounded-[3rem] blur-2xl group-hover:opacity-75 transition-opacity duration-500" />
+          <div className="relative aspect-[4/5] rounded-[2.5rem] overflow-hidden shadow-2xl border-8 border-white ring-1 ring-gray-100">
+            <Image src="/brand/foto-dra.jpeg" alt="Dra. Marina Soto" fill className="object-cover" priority />
+          </div>
+        </div>
+      </section>
 
       {/* SECCIÓN SOBRE LA DRA MARINA */}
       <section className="py-24 bg-white/40 backdrop-blur-sm border-y border-gray-100">
