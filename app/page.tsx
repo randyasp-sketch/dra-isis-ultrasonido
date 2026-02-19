@@ -174,7 +174,7 @@ export default function Home() {
             
             <div className="grid gap-6">
               {[
-                { t: "Formación Médica Especializada", d: "Cuento con las credenciales necesarias para garantizar diagnósticos confiables." },
+                { t: "Formación Médica Especializada", d: "Médico General por la UNACH, con especialidad realizada en el Centro Médico Nacional La Raza (UNAM). Mi sólida trayectoria académica respalda la precisión de cada diagnóstico para tu tranquilidad." },
                 { t: "Atención Individualizada", d: "Aquí no eres un número más; cada paciente recibe mi atención completa y dedicada." },
                 { t: "Interpretación Ética", d: "La importancia de un ultrasonido bien hecho radica en una interpretación honesta y precisa." }
               ].map((item, i) => (
