@@ -13,7 +13,7 @@ const CONFIG = {
   bookingUrl: "https://calendar.app.google/NG2KjyGRDB8gYXUW9",
   depositUrl: "PON_AQUI_TU_LINK_DE_MERCADO_PAGO",
   emergencyPhone: "961 607 8413", // Formato visual para llamadas
-  emergencyPhoneRaw: "5219616078413", // Formato para el enlace tel:
+  emergencyPhoneRaw: "9616078413", // Formato para el enlace tel:
   // DATOS LEGALES (Asegúrate de poner los reales aquí)
   cedulaProfesional: "11538775", 
   permisoCofepris: "2507025036X00097", 
