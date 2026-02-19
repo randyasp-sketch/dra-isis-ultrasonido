@@ -332,59 +332,62 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 4. BARRA DE SOLICITUD FLOTANTE (ESTILO IPHONE) */}
-      {selectedServices.length > 0 && (
-        <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-[100] w-[95%] max-w-2xl animate-in slide-in-from-bottom-10 duration-500">
-          <div className="bg-[#1a1a1a]/85 backdrop-blur-2xl border border-white/20 rounded-[2.5rem] p-4 shadow-2xl flex items-center justify-between text-white">
-            <div className="pl-4">
-              <span className="text-white/50 text-[10px] font-black uppercase tracking-widest leading-none mb-1 block">Seleccionados</span>
-              <p className="text-lg font-bold leading-none">
-                {selectedServices.length} <span className="text-xs font-medium text-white/60 text-transform: lowercase">estudios</span>
-              </p>
-            </div>
-            
-            <div className="flex items-center gap-3">
-              <button 
-                onClick={() => setSelectedServices([])}
-                className="px-4 py-2 text-[10px] font-bold text-white/40 hover:text-white transition-colors uppercase tracking-widest"
-              >
-                Limpiar
-              </button>
-              <a
-                href={generateWALink()}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="bg-[#25D366] text-white px-8 py-4 rounded-2xl font-black text-xs hover:scale-105 active:scale-95 transition-all flex items-center gap-2 shadow-lg shadow-[#25D366]/20"
-              >
-                SOLICITAR POR WHATSAPP
-              </a>
-            </div>
-          </div>
+  {/* 4. BARRA DE SOLICITUD FLOTANTE (ESTILO IPHONE) */}
+  {selectedServices.length > 0 && (
+    <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-[100] w-[95%] max-w-2xl animate-in slide-in-from-bottom-10 duration-500">
+      <div className="bg-[#1a1a1a]/85 backdrop-blur-2xl border border-white/20 rounded-[2.5rem] p-4 shadow-2xl flex items-center justify-between text-white">
+        <div className="pl-4">
+          <span className="text-white/50 text-[10px] font-black uppercase tracking-widest leading-none mb-1 block">Seleccionados</span>
+          <p className="text-lg font-bold leading-none">
+            {selectedServices.length} <span className="text-xs font-medium text-white/60 text-transform: lowercase">estudios</span>
+          </p>
         </div>
-      )}
+        
+        <div className="flex items-center gap-3">
+          <button 
+            onClick={() => setSelectedServices([])}
+            className="px-4 py-2 text-[10px] font-bold text-white/40 hover:text-white transition-colors uppercase tracking-widest"
+          >
+            Limpiar
+          </button>
+          <a
+            href={generateWALink()}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="bg-[#25D366] text-white px-8 py-4 rounded-2xl font-black text-xs hover:scale-105 active:scale-95 transition-all flex items-center gap-2 shadow-lg shadow-[#25D366]/20"
+          >
+            SOLICITAR POR WHATSAPP
+          </a>
+        </div>
+      </div>
+    </div>
+  )}
 
-    
   {/* CTA FINAL RE-DISEÑADO */}
-      <section className="mx-auto max-w-7xl px-6 py-24">
-        <div className="relative rounded-[4rem] bg-gradient-to-br from-[#2A5368] to-[#1f3e4e] px-8 py-20 text-center overflow-hidden shadow-[0_35px_60px_-15px_rgba(42,83,104,0.3)] border border-white/10">
-          
-          {/* Elementos Decorativos Abstractos */}
-          <div className="absolute top-0 left-0 w-96 h-96 bg-white/5 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2 pointer-events-none" />
-          <div className="absolute bottom-0 right-0 w-80 h-80 bg-[#9E3A4D]/10 rounded-full blur-3xl translate-x-1/3 translate-y-1/3 pointer-events-none" />
-          
-          <div className="relative z-10 max-w-3xl mx-auto space-y-10">
-            <div className="space-y-4">
-              <span className="text-[#9E3A4D] font-black text-[10px] uppercase tracking-[0.4em] bg-white/10 px-4 py-2 rounded-full backdrop-blur-md">
-                Agenda tu diagnóstico hoy
-              </span>
-              <h2 className="text-4xl md:text-6xl font-bold text-white tracking-tight leading-[1.1]">
-                No dejes tu tranquilidad <br className="hidden md:block" /> 
-                <span className="text-white/80 font-light italic">para después.</span>
-              </h2>
-              <p className="text-white/60 text-lg md:text-xl font-medium max-w-2xl mx-auto leading-relaxed">
-                Obtén la claridad médica que necesitas con la calidez y precisión de la Dra. Isis Marina Soto. Cupos limitados para esta semana.
-              </p>
-            </div>
+  <section className="py-24 bg-gradient-to-br from-[#2A5368] to-[#1a3a4d] relative overflow-hidden">
+    <div className="absolute inset-0 opacity-10">
+      <div className="absolute top-0 right-0 w-96 h-96 bg-[#9E3A4D] rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
+    </div>
+    <div className="relative z-10 max-w-3xl mx-auto space-y-8 px-6">
+  
+  {/* Etiqueta corregida: Fondo blanco, texto vino, sin saltos de línea */}
+  <div className="flex justify-center">
+    <div className="inline-flex items-center justify-center bg-white px-5 py-2 rounded-full shadow-lg">
+      <span className="text-[#9E3A4D] font-black text-[9px] sm:text-[10px] uppercase tracking-[0.2em] whitespace-nowrap">
+        Agenda tu diagnóstico hoy
+      </span>
+    </div>
+  </div>
+
+  <div className="space-y-4">
+    <h2 className="text-4xl md:text-6xl font-bold text-white tracking-tight leading-[1.1]">
+      No dejes tu tranquilidad <br className="hidden md:block" /> 
+      <span className="text-white/80 font-light italic">para después.</span>
+    </h2>
+    <p className="text-white/60 text-lg md:text-xl font-medium max-w-2xl mx-auto leading-relaxed">
+      Obtén la claridad médica que necesitas con la calidez y precisión de la Dra. Isis Marina Soto. Cupos limitados para esta semana.
+    </p>
+  </div>
 
             <div className="flex flex-col sm:flex-row justify-center items-center gap-6">
               <Button 
@@ -408,22 +411,21 @@ export default function Home() {
               </div>
             </div>
 
-            {/* Texto de Urgencias integrado */}
-            <div className="pt-8 border-t border-white/10 inline-block">
-              <p className="text-white/50 text-xs font-bold uppercase tracking-widest mb-2">¿Es una urgencia médica?</p>
-              <a 
-                href={`tel:${CONFIG.emergencyPhoneRaw}`} 
-                className="text-white hover:text-[#9E3A4D] transition-colors text-xl font-black flex items-center justify-center gap-3"
-              >
-                <span className="flex h-2 w-2 rounded-full bg-red-500 animate-ping" />
-                Llamar al {CONFIG.emergencyPhone}
-              </a>
-            </div>
+          {/* Texto de Urgencias integrado */}
+          <div className="pt-8 border-t border-white/10 inline-block">
+            <p className="text-white/50 text-xs font-bold uppercase tracking-widest mb-2">¿Es una urgencia médica?</p>
+            <a 
+              href={`tel:${CONFIG.emergencyPhoneRaw}`} 
+              className="text-white hover:text-[#9E3A4D] transition-colors text-xl font-black flex items-center justify-center gap-3"
+            >
+              <span className="flex h-2 w-2 rounded-full bg-red-500 animate-ping" />
+              Llamar al {CONFIG.emergencyPhone}
+            </a>
           </div>
         </div>
       </section>
 
-     <footer className="py-16 text-center space-y-8 border-t border-gray-100">
+      <footer className="py-16 text-center space-y-8 border-t border-gray-100">
         {/* Datos de la Dra. y Dirección Funcional */}
         <div className="text-gray-400 text-[10px] font-bold tracking-[0.2em] uppercase space-y-4">
           <p className="text-gray-500">Dra. Isis Marina Soto • Especialista en Ultrasonido</p>
