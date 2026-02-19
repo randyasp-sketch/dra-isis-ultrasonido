@@ -233,9 +233,23 @@ export default function Home() {
                 title: "Ultrasonidos Convencionales",
                 color: "#2A5368",
                 items: [
-                  "Cuello y Tiroides", "Mama", "Hígado y vías biliares", "Abdomen completo", 
-                  "Pélvico", "Endovaginal", "Obstétrico", "Tejidos blandos", "Renal", "Prostático",
-                  "Testicular", "Inguinal", "Píloro", "Apendicular", "Colecciones"
+                  "Cuello y Tiroides",
+  "Mama",
+  "Abdomen completo",
+  "Abdomen superior",
+  "Hígado y vías biliares",
+  "Renal y vejiga",
+  "Renal y prostático",
+  "Prostático",
+  "Testicular",
+  "Pélvico",
+  "Endovaginal",
+  "Obstétrico",
+  "Tejidos blandos",
+  "Apendicular",
+  "Píloro",
+  "Inguinal",
+  "Colecciones"
                 ]
               },
               {
@@ -243,8 +257,8 @@ export default function Home() {
                 title: "Doppler Especializado",
                 color: "#9E3A4D",
                 items: [
-                  "Carotídeo", "Hepático nativo", "Injerto renal", "Arterial miembros", 
-                  "Venoso miembros", "Insuficiencia venosa", "Varicocele"
+                  "Carotídeo", "Hepático nativo", "Injerto hepático", "Renal nativo", "Injerto renal", "Arterial miembros", 
+                  "Venoso miembros", "Insuficiencia venosa", "Testicular", "Varicocele"
                 ]
               },
               {
