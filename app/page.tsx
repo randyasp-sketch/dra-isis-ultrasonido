@@ -125,7 +125,7 @@ export default function Home() {
             Atención que <br /> <span className="text-[#9E3A4D]">te escucha.</span>
           </h1>
           <p className="text-xl text-gray-500 leading-relaxed max-w-xl mx-auto lg:mx-0">
-            Soy la Dra. Isis Marina Soto. Mi compromiso es brindarte un diagnóstico preciso con la calidez y el respeto que mereces.
+            Soy la Dra. Isis Marina Soto - Médico radiologo. Mi compromiso es brindarte un diagnóstico preciso con la calidez y el respeto que mereces.
           </p>
           <div className="flex flex-col sm:flex-row justify-center lg:justify-start gap-4 pt-4">
             <Button href={CONFIG.bookingUrl} className="px-12 py-5">Agenda tu cita ahora</Button>
