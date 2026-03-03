@@ -119,7 +119,7 @@ export default function Home() {
       <section className="mx-auto max-w-7xl px-6 py-10 md:py-16 grid lg:grid-cols-2 gap-16 items-center">
         <div className="space-y-8 text-center lg:text-left">
           <div className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-white shadow-sm border border-gray-100 text-[#2A5368] text-[10px] font-black uppercase tracking-[0.2em]">
-            <span className="flex h-2 w-2 rounded-full bg-[#9E3A4D] animate-pulse" />
+            <span className="flex h-2 w-2 shrink-0 rounded-full bg-[#9E3A4D] animate-pulse" />
             Especialista en Ultrasonido en San Cristobal de las Casas
           </div>
           <h1 className="text-5xl md:text-7xl font-bold tracking-tight text-gray-900 leading-[1.05]">
