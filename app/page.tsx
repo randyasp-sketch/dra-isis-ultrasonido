@@ -123,7 +123,7 @@ export default function Home() {
       <section className="mx-auto max-w-7xl px-6 py-10 md:py-16 grid lg:grid-cols-2 gap-16 items-center">
         <div className="space-y-8 text-center lg:text-left">
           <div className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-white shadow-sm border border-gray-100 text-[#2A5368] text-[10px] font-black uppercase tracking-[0.2em]">
-            {/* FIX: shrink-0 agregado para que no se deforme el punto */}
+            {/* FIX: shrink-0 para evitar deformación */}
             <span className="flex h-2 w-2 shrink-0 rounded-full bg-[#9E3A4D] animate-pulse" />
             Especialista en Ultrasonido en San Cristobal de las Casas
           </div>
@@ -559,88 +559,73 @@ export default function Home() {
         </div>
       </section>
 
-      <footer className="py-16 text-center space-y-8 border-t border-gray-100">
-        {/* Datos de la Dra. y Dirección Funcional */}
-        <div className="text-gray-400 text-[10px] font-bold tracking-[0.2em] uppercase space-y-4">
-          <p className="text-gray-500">
-            Dra. Isis Marina Soto • Especialista en Ultrasonido
-          </p>
-
-          {/* Dirección con Link Exacto */}
-          <div className="flex flex-col items-center gap-2">
-            <a
-              href="https://www.google.com/maps/search/?api=1&query=Luxury+Hospital+San+Cristobal+de+las+Casas"
-              target="_blank"
+      {/* FOOTER RESPONSIVO: Vertical en Móvil / Horizontal en PC */}
+      <footer className="py-12 border-t border-gray-100 bg-white/50 backdrop-blur-sm">
+        <div className="mx-auto max-w-7xl px-6 flex flex-col md:flex-row items-center justify-between gap-10 md:gap-4 text-center md:text-left">
+          
+          {/* COLUMNA 1: Datos de la Dra + Dirección (Izquierda en PC) */}
+          <div className="flex flex-col items-center md:items-start gap-4 max-w-sm text-[10px] font-bold uppercase tracking-widest text-gray-400">
+            <p className="text-gray-500">
+              Dra. Isis Marina Soto • Especialista en Ultrasonido
+            </p>
+            
+            <a 
+              href="https://www.google.com/maps/search/?api=1&query=Luxury+Hospital+San+Cristobal+de+las+Casas" 
+              target="_blank" 
               rel="noopener noreferrer"
-              className="group inline-flex flex-col items-center hover:text-[#9E3A4D] transition-colors duration-300 normal-case tracking-normal text-xs"
+              className="group flex items-center gap-2 hover:text-[#9E3A4D] transition-colors duration-300 normal-case tracking-normal text-xs text-center md:text-left"
             >
-              <svg
-                className="w-5 h-5 mb-1 text-[#9E3A4D] opacity-70 group-hover:scale-110 transition-transform"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
-                />
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
-                />
+              <svg className="w-5 h-5 text-[#9E3A4D] opacity-70 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
               </svg>
-              <span className="max-w-[250px]">
-                Prudencio Moscoso 26, Col. La Primavera, <br />
+              <span>
+                Prudencio Moscoso 26, Col. La Primavera,<br />
                 CP 29240, San Cristóbal de Las Casas, Chiapas.
               </span>
             </a>
           </div>
 
-          <span className="block opacity-60">Cofepris: 2507025036X00097</span>
+          {/* COLUMNA 2: Legal (Centro en PC) */}
+          <div className="flex flex-col items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-gray-400">
+            <span className="opacity-60">Cofepris: 2507025036X00097</span>
+            <Link 
+              href="/aviso-de-privacidad" 
+              className="underline hover:text-[#9E3A4D] transition-colors"
+            >
+              Aviso de Privacidad
+            </Link>
+          </div>
 
-          {/* LINK DE AVISO DE PRIVACIDAD INTEGRADO */}
-          <Link
-            href="/aviso-de-privacidad"
-            className="block mt-4 text-[9px] text-gray-400 underline hover:text-[#9E3A4D] transition-colors"
-          >
-            Aviso de Privacidad
-          </Link>
-        </div>
-
-        {/* Firma GENEM */}
-        <div className="flex flex-col items-center gap-3">
-          <p className="text-[9px] font-black text-gray-300 uppercase tracking-widest">
-            Powered by
-          </p>
-          <a
-            href="https://consultoriagen.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="group flex flex-col items-center transition-all"
-          >
-            <div className="mb-2 flex h-8 w-8 items-center justify-center">
-              <Image
-                src="/genem.png"
-                alt="Logo GENEM"
-                width={28}
-                height={28}
-                className="object-contain"
-              />
-            </div>
-            <span className="text-sm font-black text-[#2A5368] group-hover:text-[#9E3A4D] transition-colors tracking-tighter">
-              GENEM
-              <span className="text-[#9E3A4D] group-hover:text-[#2A5368]">
-                .
+          {/* COLUMNA 3: Firma GENEM (Derecha en PC) */}
+          <div className="flex flex-col items-center md:items-end gap-1">
+            <p className="text-[9px] font-black text-gray-300 uppercase tracking-widest mb-1">
+              Powered by
+            </p>
+            <a 
+              href="https://consultoriagen.com" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="group flex flex-col items-center md:items-end transition-all"
+            >
+              <div className="flex items-center gap-2">
+                <span className="text-sm font-black text-[#2A5368] group-hover:text-[#9E3A4D] transition-colors tracking-tighter">
+                  GENEM<span className="text-[#9E3A4D] group-hover:text-[#2A5368]">.</span>
+                </span>
+                <Image 
+                  src="/genem.png" 
+                  alt="Logo GENEM"
+                  width={20}
+                  height={20}
+                  className="object-contain" 
+                />
+              </div>
+              <span className="text-[9px] font-bold text-gray-400 group-hover:text-gray-600 transition-colors lowercase">
+                consultoriagen.com
               </span>
-            </span>
-            <span className="text-[9px] font-bold text-gray-400 group-hover:text-gray-600 transition-colors lowercase">
-              consultoriagen.com
-            </span>
-          </a>
+            </a>
+          </div>
+
         </div>
       </footer>
     </main>
