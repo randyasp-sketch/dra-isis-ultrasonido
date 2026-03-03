@@ -451,7 +451,16 @@ export default function Home() {
 
           <span className="block opacity-60">Cofepris: 2507025036X00097</span>
         </div>
+{/* ... código anterior del footer ... */}
 
+<span className="block opacity-60">Cofepris: 2507025036X00097</span>
+
+{/* AGREGA ESTO AQUÍ ABAJO */}
+<Link href="/aviso-de-privacidad" className="block mt-4 text-[9px] text-gray-400 underline hover:text-[#9E3A4D] transition-colors">
+  Aviso de Privacidad
+</Link>
+
+{/* ... código siguiente del footer (Firma GENEM) ... */}
         {/* Firma GENEM */}
         <div className="flex flex-col items-center gap-3">
           <p className="text-[9px] font-black text-gray-300 uppercase tracking-widest">Powered by</p>
