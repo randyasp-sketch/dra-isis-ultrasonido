@@ -56,23 +56,20 @@ const Button = ({ href, variant = "primary", children, className, onClick, disab
 };
 
 export default function Home() {
-  // 1. La canasta que recuerda qué estudios elegiste
   const [selectedServices, setSelectedServices] = useState<string[]>([]);
 
-  // 2. La función para marcar y desmarcar estudios
   const toggleService = (service: string) => {
     setSelectedServices((prev) =>
       prev.includes(service)
-        ? prev.filter((s) => s !== service) // Si ya estaba, lo saca
-        : [...prev, service] // Si no estaba, lo mete
+        ? prev.filter((s) => s !== service)
+        : [...prev, service]
     );
   };
 
-  // 3. Preparación del mensaje de WhatsApp con la lista de estudios
   const generateWALink = () => {
-    const list = selectedServices.map((s) => `• ${s}`).join("%0A"); // Crea la lista con puntitos
+    const list = selectedServices.map((s) => `• ${s}`).join("%0A");
     const message = `Hola Dra. Marina, me gustaría solicitar informes y agendar los siguientes estudios:%0A%0A${list}%0A%0A¿Qué disponibilidad tiene?`;
-    return `https://wa.me/${CONFIG.whatsappE164}?text=${message}`; // Usa el número de CONFIG
+    return `https://wa.me/${CONFIG.whatsappE164}?text=${message}`;
   };
 
   return (
@@ -83,7 +80,7 @@ export default function Home() {
         <div className="absolute top-[20%] -right-[5%] w-[30%] h-[50%] rounded-full bg-[#2A5368]/5 blur-[100px]" />
       </div>
 
-      {/* HEADER CON BOTÓN DE URGENCIAS */}
+      {/* HEADER */}
       <header className="mx-auto max-w-7xl px-6 py-8 flex flex-col sm:flex-row items-center justify-between gap-6">
         <Image
           src="/brand/logotipo-dra.svg"
@@ -93,7 +90,6 @@ export default function Home() {
           priority
           className="w-[220px] sm:w-[320px] h-auto"
         />
-
         <div className="flex flex-col sm:flex-row items-center gap-4">
           <a
             href={`tel:${CONFIG.emergencyPhoneRaw}`}
@@ -112,7 +108,6 @@ export default function Home() {
               </span>
             </div>
           </a>
-
           <Button href={CONFIG.bookingUrl} className="text-xs">
             RESERVAR CITA
           </Button>
@@ -123,7 +118,6 @@ export default function Home() {
       <section className="mx-auto max-w-7xl px-6 py-10 md:py-16 grid lg:grid-cols-2 gap-16 items-center">
         <div className="space-y-8 text-center lg:text-left">
           <div className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-white shadow-sm border border-gray-100 text-[#2A5368] text-[10px] font-black uppercase tracking-[0.2em]">
-            {/* FIX: shrink-0 para evitar deformación */}
             <span className="flex h-2 w-2 shrink-0 rounded-full bg-[#9E3A4D] animate-pulse" />
             Especialista en Ultrasonido en San Cristobal de las Casas
           </div>
@@ -159,10 +153,9 @@ export default function Home() {
         </div>
       </section>
 
-      {/* SECCIÓN SOBRE LA DRA MARINA */}
+      {/* SECCIÓN SOBRE LA DRA */}
       <section className="py-24 bg-white/40 backdrop-blur-sm border-y border-gray-100">
         <div className="mx-auto max-w-7xl px-6 grid lg:grid-cols-2 gap-16 items-center">
-          {/* Imagen de Apoyo */}
           <div className="relative group">
             <div className="relative rounded-[2.5rem] overflow-hidden shadow-2xl border-4 border-white">
               <Image
@@ -174,7 +167,6 @@ export default function Home() {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[#2A5368]/40 to-transparent" />
             </div>
-            {/* Badge de Años */}
             <div className="absolute -bottom-6 -right-6 bg-white p-6 rounded-3xl shadow-xl border border-gray-100 hidden md:block animate-bounce-slow">
               <p className="text-2xl font-bold text-[#9E3A4D]">+10000</p>
               <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest leading-none">
@@ -233,7 +225,6 @@ export default function Home() {
               ))}
             </div>
 
-            {/* RECUADRO LEGAL REQUERIDO */}
             <div className="p-8 rounded-[2.5rem] bg-gray-50 border border-gray-100 shadow-inner">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 <div>
@@ -244,7 +235,6 @@ export default function Home() {
                     {CONFIG.cedulaProfesional}
                   </p>
                 </div>
-
                 <div className="sm:col-span-2 pt-4 border-t border-gray-200">
                   <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-1">
                     Permiso COFEPRIS
@@ -259,10 +249,9 @@ export default function Home() {
         </div>
       </section>
 
-      {/* SECCIÓN DE SERVICIOS */}
+      {/* SECCIÓN SERVICIOS */}
       <section className="py-24 bg-white relative overflow-hidden">
         <div className="mx-auto max-w-3xl px-6">
-          {/* Encabezado Principal */}
           <div className="text-center mb-16 space-y-4">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#9E3A4D]/5 text-[#9E3A4D] text-[10px] font-black uppercase tracking-[0.3em] border border-[#9E3A4D]/10">
               Servicios Especializados
@@ -279,7 +268,6 @@ export default function Home() {
             </p>
           </div>
 
-          {/* Acordeones de Categorías */}
           <div className="space-y-4 mb-12">
             {[
               {
@@ -418,10 +406,8 @@ export default function Home() {
             ))}
           </div>
 
-          {/* DIFERENCIADOR: RESULTADOS AL MOMENTO */}
           <div className="bg-[#2A5368]/5 border border-[#2A5368]/10 rounded-[2.5rem] p-8 md:p-10 relative overflow-hidden">
             <div className="absolute top-0 right-0 w-32 h-32 bg-[#9E3A4D]/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
-
             <div className="relative z-10 flex flex-col md:flex-row items-center gap-8 text-center md:text-left">
               <div className="w-20 h-20 rounded-[2rem] bg-white shadow-xl flex items-center justify-center text-[#9E3A4D] shrink-0">
                 <svg
@@ -438,7 +424,6 @@ export default function Home() {
                   />
                 </svg>
               </div>
-
               <div className="space-y-2">
                 <h4 className="text-xl font-bold text-[#2A5368]">
                   Resultados listos al finalizar
@@ -454,7 +439,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 4. BARRA DE SOLICITUD FLOTANTE */}
+      {/* BARRA FLOTANTE */}
       {selectedServices.length > 0 && (
         <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-[100] w-[95%] max-w-2xl animate-in slide-in-from-bottom-10 duration-500">
           <div className="bg-[#1a1a1a]/85 backdrop-blur-2xl border border-white/20 rounded-[2.5rem] p-4 shadow-2xl flex items-center justify-between text-white">
@@ -469,7 +454,6 @@ export default function Home() {
                 </span>
               </p>
             </div>
-
             <div className="flex items-center gap-3">
               <button
                 onClick={() => setSelectedServices([])}
@@ -490,13 +474,12 @@ export default function Home() {
         </div>
       )}
 
-      {/* CTA FINAL RE-DISEÑADO */}
+      {/* CTA FINAL */}
       <section className="py-24 bg-gradient-to-br from-[#2A5368] to-[#1a3a4d] relative overflow-hidden">
         <div className="absolute inset-0 opacity-10">
           <div className="absolute top-0 right-0 w-96 h-96 bg-[#9E3A4D] rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
         </div>
         <div className="relative z-10 max-w-3xl mx-auto space-y-8 px-6">
-          {/* Etiqueta corregida: Fondo blanco, texto vino, sin saltos de línea */}
           <div className="flex justify-center">
             <div className="inline-flex items-center justify-center bg-white px-5 py-2 rounded-full shadow-lg">
               <span className="text-[#9E3A4D] font-black text-[9px] sm:text-[10px] uppercase tracking-[0.2em] whitespace-nowrap">
@@ -525,7 +508,6 @@ export default function Home() {
             >
               Reservar espacio ahora
             </Button>
-
             <div className="flex flex-col gap-2">
               <Button
                 href={waLink}
@@ -540,14 +522,14 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Texto de Urgencias integrado y centrado */}
-          <div className="pt-8 border-t border-white/10 w-full flex flex-col items-center text-center">
-            <p className="text-white/50 text-xs font-bold uppercase tracking-widest mb-3">
+          {/* Texto de Urgencias centrado */}
+          <div className="pt-8 border-t border-white/10 w-full flex flex-col md:flex-row items-center justify-center gap-4 md:gap-10 text-center">
+            <p className="text-white/50 text-xs font-bold uppercase tracking-widest mb-0">
               ¿Es una urgencia médica?
             </p>
             <a
               href={`tel:${CONFIG.emergencyPhoneRaw}`}
-              className="text-white hover:text-[#9E3A4D] transition-colors text-xl font-black flex items-center justify-center gap-3"
+              className="text-white hover:text-[#9E3A4D] transition-colors text-xl font-black flex items-center gap-3"
             >
               <span className="flex h-3 w-3 relative">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
@@ -559,73 +541,88 @@ export default function Home() {
         </div>
       </section>
 
-      {/* FOOTER RESPONSIVO: Vertical en Móvil / Horizontal en PC */}
+      {/* FOOTER REDISEÑADO (COMPACTO Y BONITO) */}
       <footer className="py-12 border-t border-gray-100 bg-white/50 backdrop-blur-sm">
-        <div className="mx-auto max-w-7xl px-6 flex flex-col md:flex-row items-center justify-between gap-10 md:gap-4 text-center md:text-left">
+        <div className="mx-auto max-w-4xl px-6 grid grid-cols-1 md:grid-cols-3 gap-8 items-start">
           
-          {/* COLUMNA 1: Datos de la Dra + Dirección (Izquierda en PC) */}
-          <div className="flex flex-col items-center md:items-start gap-4 max-w-sm text-[10px] font-bold uppercase tracking-widest text-gray-400">
-            <p className="text-gray-500">
-              Dra. Isis Marina Soto • Especialista en Ultrasonido
+          {/* COLUMNA 1: DIRECCIÓN (Alineada Izquierda) */}
+          <div className="flex flex-col items-center md:items-start text-center md:text-left space-y-3">
+            <p className="text-[10px] font-bold uppercase tracking-widest text-gray-500">
+              Ubicación
             </p>
-            
             <a 
               href="https://www.google.com/maps/search/?api=1&query=Luxury+Hospital+San+Cristobal+de+las+Casas" 
               target="_blank" 
               rel="noopener noreferrer"
-              className="group flex items-center gap-2 hover:text-[#9E3A4D] transition-colors duration-300 normal-case tracking-normal text-xs text-center md:text-left"
+              className="group flex flex-col md:flex-row items-center md:items-start gap-2 text-xs text-gray-600 hover:text-[#9E3A4D] transition-colors"
             >
-              <svg className="w-5 h-5 text-[#9E3A4D] opacity-70 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-              </svg>
-              <span>
-                Prudencio Moscoso 26, Col. La Primavera,<br />
-                CP 29240, San Cristóbal de Las Casas, Chiapas.
-              </span>
+               <svg className="w-5 h-5 text-[#9E3A4D] opacity-80 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+               </svg>
+               <span>
+                 Prudencio Moscoso 26, <br />
+                 Col. La Primavera, CP 29240.<br />
+                 San Cristóbal de Las Casas.
+               </span>
             </a>
           </div>
 
-          {/* COLUMNA 2: Legal (Centro en PC) */}
-          <div className="flex flex-col items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-gray-400">
-            <span className="opacity-60">Cofepris: 2507025036X00097</span>
-            <Link 
-              href="/aviso-de-privacidad" 
-              className="underline hover:text-[#9E3A4D] transition-colors"
-            >
-              Aviso de Privacidad
-            </Link>
+          {/* COLUMNA 2: LEGAL (Centrada) */}
+          <div className="flex flex-col items-center justify-center space-y-3">
+            <p className="text-[10px] font-bold uppercase tracking-widest text-gray-500">
+              Legal
+            </p>
+            <div className="flex flex-col items-center text-xs text-gray-600">
+              <span>Cofepris: 2507025036X00097</span>
+              <span className="text-gray-300 my-1">•</span>
+              <Link 
+                href="/aviso-de-privacidad" 
+                className="underline hover:text-[#9E3A4D] transition-colors"
+              >
+                Aviso de Privacidad
+              </Link>
+            </div>
           </div>
 
-          {/* COLUMNA 3: Firma GENEM (Derecha en PC) */}
-          <div className="flex flex-col items-center md:items-end gap-1">
-            <p className="text-[9px] font-black text-gray-300 uppercase tracking-widest mb-1">
-              Powered by
+          {/* COLUMNA 3: BRANDING (Alineada Derecha) */}
+          <div className="flex flex-col items-center md:items-end text-center md:text-right space-y-3">
+             <p className="text-[10px] font-bold uppercase tracking-widest text-gray-500">
+              Desarrollo
             </p>
             <a 
               href="https://consultoriagen.com" 
               target="_blank" 
               rel="noopener noreferrer" 
-              className="group flex flex-col items-center md:items-end transition-all"
+              className="group flex items-center gap-2"
             >
-              <div className="flex items-center gap-2">
-                <span className="text-sm font-black text-[#2A5368] group-hover:text-[#9E3A4D] transition-colors tracking-tighter">
+              <div className="flex flex-col items-end">
+                <span className="text-sm font-black text-[#2A5368] group-hover:text-[#9E3A4D] transition-colors tracking-tighter leading-none">
                   GENEM<span className="text-[#9E3A4D] group-hover:text-[#2A5368]">.</span>
                 </span>
-                <Image 
-                  src="/genem.png" 
-                  alt="Logo GENEM"
-                  width={20}
-                  height={20}
-                  className="object-contain" 
-                />
+                <span className="text-[9px] font-bold text-gray-400 group-hover:text-gray-600 transition-colors lowercase">
+                  consultoriagen.com
+                </span>
               </div>
-              <span className="text-[9px] font-bold text-gray-400 group-hover:text-gray-600 transition-colors lowercase">
-                consultoriagen.com
-              </span>
+              <div className="w-8 h-8 rounded-lg bg-gray-50 flex items-center justify-center border border-gray-100">
+                 <Image 
+                   src="/genem.png" 
+                   alt="Logo GENEM"
+                   width={20}
+                   height={20}
+                   className="object-contain" 
+                 />
+              </div>
             </a>
           </div>
 
+        </div>
+        
+        {/* Copyright Simple al final */}
+        <div className="mt-12 text-center border-t border-gray-100 pt-8">
+           <p className="text-[10px] text-gray-400">
+             © {new Date().getFullYear()} {CONFIG.brandName}. Todos los derechos reservados.
+           </p>
         </div>
       </footer>
     </main>
