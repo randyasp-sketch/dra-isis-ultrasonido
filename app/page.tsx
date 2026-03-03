@@ -452,9 +452,6 @@ export default function Home() {
 
           <span className="block opacity-60">Cofepris: 2507025036X00097</span>
         </div>
-{/* ... código anterior del footer ... */}
-
-<span className="block opacity-60">Cofepris: 2507025036X00097</span>
 
 {/* AGREGA ESTO AQUÍ ABAJO */}
 <Link href="/aviso-de-privacidad" className="block mt-4 text-[9px] text-gray-400 underline hover:text-[#9E3A4D] transition-colors">
