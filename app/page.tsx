@@ -588,7 +588,7 @@ export default function Home() {
           {/* COLUMNA 3: BRANDING (Alineada Derecha) */}
           <div className="flex flex-col items-center md:items-end text-center md:text-right space-y-3">
              <p className="text-[10px] font-bold uppercase tracking-widest text-gray-500">
-              Desarrollo
+              Powered by:
             </p>
             <a 
               href="https://consultoriagen.com" 
