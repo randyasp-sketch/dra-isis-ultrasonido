@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import Script from "next/script";
+import { Analytics } from "@vercel/analytics/next";
 
 // Mantenemos tus metadatos para SEO
 export const metadata: Metadata = {
@@ -43,6 +44,7 @@ export default function RootLayout({
         </noscript>
 
         {children}
+        <Analytics />
       </body>
     </html>
   );
