@@ -4,6 +4,7 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { cn } from "./lib/utils";
+import { useRouter } from "next/navigation";
 import "./globals.css";
 
 const CONFIG = {
@@ -45,7 +46,7 @@ const Button = ({ href, variant = "primary", children, className, onClick, disab
       rel="noopener noreferrer"
       onClick={onClick}
       className={cn(
-        "inline-flex items-center justify-center rounded-2xl px-6 sm:px-8 py-3.5 sm:py-4 text-xs sm:text-sm font-bold transition-all duration-300 active:scale-[0.95] text-center",
+        "inline-flex items-center justify-center rounded-2xl px-6 sm:px-8 py-3.5 sm:py-4 text-xs sm:text-sm font-bold transition-all duration-300 active:scale-[0.95] text-center cursor-pointer",
         variants[disabled ? "disabled" : (variant as keyof typeof variants)],
         className
       )}
@@ -57,6 +58,7 @@ const Button = ({ href, variant = "primary", children, className, onClick, disab
 
 export default function Home() {
   const [selectedServices, setSelectedServices] = useState<string[]>([]);
+  const router = useRouter(); // Inicializamos el router
 
   const toggleService = (service: string) => {
     setSelectedServices((prev) =>
@@ -69,7 +71,14 @@ export default function Home() {
   const generateWALink = () => {
     const list = selectedServices.map((s) => `• ${s}`).join("%0A");
     const message = `Hola Dra. Marina, me gustaría solicitar informes y agendar los siguientes estudios:%0A%0A${list}%0A%0A¿Qué disponibilidad tiene?`;
-    return `https://wa.me/${CONFIG.whatsappE164}?text=${message}`;
+    return `https://wa.me/${CONFIG.whatsappE164}?text=${encodeURIComponent(message)}`;
+  };
+
+  // Función mágica: Abre el link en pestaña nueva y redirige la actual a la página de gracias.
+  const handleBookingClick = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>, url: string) => {
+    e.preventDefault(); // Evitamos que el link normal funcione
+    window.open(url, "_blank"); // Abrimos WA o Calendario en otra pestaña
+    router.push("/cita-confirmada"); // Mandamos la pestaña actual a la página de gracias
   };
 
   return (
@@ -111,7 +120,11 @@ export default function Home() {
           
           {/* Fila de botones 50/50 en celular */}
           <div className="flex gap-2 w-full sm:w-auto">
-            <Button href={CONFIG.bookingUrl} className="flex-1 sm:flex-none text-[10px] sm:text-xs px-4">
+            <Button 
+              href={CONFIG.bookingUrl} 
+              onClick={(e: any) => handleBookingClick(e, CONFIG.bookingUrl)} 
+              className="flex-1 sm:flex-none text-[10px] sm:text-xs px-4"
+            >
               RESERVAR
             </Button>
             <Link 
@@ -140,10 +153,19 @@ export default function Home() {
             mereces.
           </p>
           <div className="flex flex-col sm:flex-row justify-center lg:justify-start gap-3 pt-4">
-            <Button href={CONFIG.bookingUrl} className="w-full sm:w-auto px-10 py-4 sm:py-5">
+            <Button 
+              href={CONFIG.bookingUrl} 
+              onClick={(e: any) => handleBookingClick(e, CONFIG.bookingUrl)}
+              className="w-full sm:w-auto px-10 py-4 sm:py-5"
+            >
               Agenda tu cita ahora
             </Button>
-            <Button href={waLink} variant="whatsapp" className="w-full sm:w-auto px-10 py-4 sm:py-5">
+            <Button 
+              href={waLink} 
+              variant="whatsapp" 
+              onClick={(e: any) => handleBookingClick(e, waLink)}
+              className="w-full sm:w-auto px-10 py-4 sm:py-5"
+            >
               Cita por WhatsApp
             </Button>
           </div>
@@ -445,7 +467,8 @@ export default function Home() {
                 href={generateWALink()}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="bg-[#25D366] text-white px-4 sm:px-8 py-3 sm:py-4 rounded-xl sm:rounded-2xl font-black text-[10px] sm:text-xs hover:scale-105 active:scale-95 transition-all flex items-center gap-2 shadow-lg shadow-[#25D366]/20 text-center"
+                onClick={(e: any) => handleBookingClick(e, generateWALink())}
+                className="bg-[#25D366] text-white px-4 sm:px-8 py-3 sm:py-4 rounded-xl sm:rounded-2xl font-black text-[10px] sm:text-xs hover:scale-105 active:scale-95 transition-all flex items-center gap-2 shadow-lg shadow-[#25D366]/20 text-center cursor-pointer"
               >
                 SOLICITAR <span className="hidden sm:inline">POR WHATSAPP</span>
               </a>
@@ -484,6 +507,7 @@ export default function Home() {
           <div className="flex flex-col sm:flex-row justify-center items-center gap-4 sm:gap-6 pt-4">
             <Button
               href={CONFIG.bookingUrl}
+              onClick={(e: any) => handleBookingClick(e, CONFIG.bookingUrl)}
               className="w-full sm:w-auto px-10 sm:px-14 py-4 sm:py-6 bg-white text-[#2A5368] hover:bg-[#FDFDFD] hover:scale-105 shadow-xl transition-all duration-300 text-sm sm:text-base"
             >
               Reservar espacio ahora
@@ -492,6 +516,7 @@ export default function Home() {
               <Button
                 href={waLink}
                 variant="whatsapp"
+                onClick={(e: any) => handleBookingClick(e, waLink)}
                 className="w-full sm:w-auto px-10 py-4 sm:py-6 hover:scale-105 transition-all duration-300 text-sm sm:text-base"
               >
                 Hablar por WhatsApp
