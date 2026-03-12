@@ -12,8 +12,7 @@ const CONFIG = {
   specialty: "Ultrasonido Diagnóstico",
   city: "San Cristóbal de las Casas",
   whatsappE164: "5219673119697",
-  whatsappPrefill: "Hola Dra. Marina, quiero agendar un ultrasonido...",
-  bookingUrl: "https://calendar.app.google/NG2KjyGRDB8gYXUW9",
+  whatsappPrefill: "Hola Dra. Marina, me gustaría agendar un ultrasonido...",
   depositUrl: "PON_AQUI_TU_LINK_DE_MERCADO_PAGO",
   emergencyPhone: "961 607 8413", // Formato visual para llamadas
   emergencyPhoneRaw: "9616078413", // Formato para el enlace tel:
@@ -21,6 +20,7 @@ const CONFIG = {
   permisoCofepris: "2507025036X00097",
 };
 
+// Esta función es vital para Google Ads/Analytics
 const track = (event: string, params: Record<string, any> = {}) => {
   if (typeof window !== "undefined") {
     (window as any).dataLayer = (window as any).dataLayer || [];
@@ -35,7 +35,7 @@ const Button = ({ href, variant = "primary", children, className, onClick, disab
     primary: "bg-[#9E3A4D] text-white hover:bg-[#872F40] shadow-lg shadow-[#9E3A4D]/20",
     secondary: "bg-[#2A5368] text-white hover:bg-[#1f3e4e] shadow-lg shadow-[#2A5368]/20",
     outline: "bg-white text-[#2A5368] border border-gray-200 hover:bg-[#2A5368] hover:text-white",
-    whatsapp: "bg-[#25D366] text-white hover:bg-[#1EBE5D] shadow-lg shadow-[#25D366]/20",
+    whatsapp: "bg-[#25D366] text-white hover:bg-[#1EBE5D] shadow-lg shadow-[#25D366]/30",
     disabled: "cursor-not-allowed bg-gray-100 text-gray-400 shadow-none",
   };
 
@@ -75,10 +75,14 @@ export default function Home() {
   };
 
   // Función mágica: Abre el link en pestaña nueva y redirige la actual a la página de gracias.
-  const handleBookingClick = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>, url: string) => {
-    e.preventDefault(); // Evitamos que el link normal funcione
-    window.open(url, "_blank"); // Abrimos WA o Calendario en otra pestaña
-    router.push("/cita-confirmada"); // Mandamos la pestaña actual a la página de gracias
+  const handleBookingClick = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>, url: string, tipoBoton: string) => {
+    e.preventDefault(); 
+    
+    // Disparamos el evento a Google Analytics/Ads antes de salir
+    track("conversion_cita", { method: tipoBoton });
+
+    window.open(url, "_blank"); 
+    router.push("/cita-confirmada"); 
   };
 
   return (
@@ -102,7 +106,7 @@ export default function Home() {
         <div className="flex flex-col sm:flex-row items-center gap-3 w-full md:w-auto">
           <a
             href={`tel:${CONFIG.emergencyPhoneRaw}`}
-            className="flex items-center justify-center gap-3 px-5 py-2.5 rounded-2xl bg-red-50 text-red-600 border border-red-100 hover:bg-red-500 hover:text-white transition-all duration-500 group w-full sm:w-auto"
+            className="flex items-center justify-center gap-3 px-5 py-3 sm:py-2.5 rounded-2xl bg-red-50 text-red-600 border border-red-100 hover:bg-red-500 hover:text-white transition-all duration-500 group w-full sm:w-auto"
           >
             <span className="relative flex h-3 w-3 shrink-0">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
@@ -118,22 +122,12 @@ export default function Home() {
             </div>
           </a>
           
-          {/* Fila de botones 50/50 en celular */}
-          <div className="flex gap-2 w-full sm:w-auto">
-            <Button 
-              href={CONFIG.bookingUrl} 
-              onClick={(e: any) => handleBookingClick(e, CONFIG.bookingUrl)} 
-              className="flex-1 sm:flex-none text-[10px] sm:text-xs px-4"
-            >
-              RESERVAR
-            </Button>
-            <Link 
-              href="/facturacion" 
-              className="flex-1 sm:flex-none inline-flex items-center justify-center rounded-2xl px-4 py-3.5 sm:py-4 text-[10px] sm:text-xs font-bold bg-white text-[#2A5368] border border-gray-200 hover:bg-[#2A5368] hover:text-white transition-all duration-300 shadow-sm text-center"
-            >
-              FACTURACIÓN
-            </Link>
-          </div>
+          <Link 
+            href="/facturacion" 
+            className="w-full sm:w-auto inline-flex items-center justify-center rounded-2xl px-6 py-3.5 sm:py-3 text-[11px] sm:text-xs font-bold bg-white text-[#2A5368] border border-gray-200 hover:bg-[#2A5368] hover:text-white transition-all duration-300 shadow-sm text-center"
+          >
+            FACTURACIÓN
+          </Link>
         </div>
       </header>
 
@@ -154,19 +148,13 @@ export default function Home() {
           </p>
           <div className="flex flex-col sm:flex-row justify-center lg:justify-start gap-3 pt-4">
             <Button 
-              href={CONFIG.bookingUrl} 
-              onClick={(e: any) => handleBookingClick(e, CONFIG.bookingUrl)}
-              className="w-full sm:w-auto px-10 py-4 sm:py-5"
-            >
-              Agenda tu cita ahora
-            </Button>
-            <Button 
               href={waLink} 
               variant="whatsapp" 
-              onClick={(e: any) => handleBookingClick(e, waLink)}
-              className="w-full sm:w-auto px-10 py-4 sm:py-5"
+              onClick={(e: any) => handleBookingClick(e, waLink, "whatsapp_hero")}
+              className="w-full sm:w-auto px-12 py-4 sm:py-5 flex items-center justify-center gap-2"
             >
-              Cita por WhatsApp
+              <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 00-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+              Agendar por WhatsApp
             </Button>
           </div>
         </div>
@@ -467,7 +455,7 @@ export default function Home() {
                 href={generateWALink()}
                 target="_blank"
                 rel="noopener noreferrer"
-                onClick={(e: any) => handleBookingClick(e, generateWALink())}
+                onClick={(e: any) => handleBookingClick(e, generateWALink(), "whatsapp_carrito")}
                 className="bg-[#25D366] text-white px-4 sm:px-8 py-3 sm:py-4 rounded-xl sm:rounded-2xl font-black text-[10px] sm:text-xs hover:scale-105 active:scale-95 transition-all flex items-center gap-2 shadow-lg shadow-[#25D366]/20 text-center cursor-pointer"
               >
                 SOLICITAR <span className="hidden sm:inline">POR WHATSAPP</span>
@@ -504,27 +492,19 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="flex flex-col sm:flex-row justify-center items-center gap-4 sm:gap-6 pt-4">
+          <div className="flex flex-col items-center justify-center pt-4">
             <Button
-              href={CONFIG.bookingUrl}
-              onClick={(e: any) => handleBookingClick(e, CONFIG.bookingUrl)}
-              className="w-full sm:w-auto px-10 sm:px-14 py-4 sm:py-6 bg-white text-[#2A5368] hover:bg-[#FDFDFD] hover:scale-105 shadow-xl transition-all duration-300 text-sm sm:text-base"
+              href={waLink}
+              variant="whatsapp"
+              onClick={(e: any) => handleBookingClick(e, waLink, "whatsapp_cta_final")}
+              className="w-full sm:w-auto px-12 py-4 sm:py-6 hover:scale-105 transition-all duration-300 text-sm sm:text-base flex items-center justify-center gap-2 shadow-xl shadow-[#25D366]/20"
             >
-              Reservar espacio ahora
+              <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 00-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+              Agendar por WhatsApp
             </Button>
-            <div className="flex flex-col gap-2 w-full sm:w-auto">
-              <Button
-                href={waLink}
-                variant="whatsapp"
-                onClick={(e: any) => handleBookingClick(e, waLink)}
-                className="w-full sm:w-auto px-10 py-4 sm:py-6 hover:scale-105 transition-all duration-300 text-sm sm:text-base"
-              >
-                Hablar por WhatsApp
-              </Button>
-              <p className="text-[9px] sm:text-[10px] text-white/40 font-bold uppercase tracking-widest text-center">
-                Respuesta inmediata
-              </p>
-            </div>
+            <p className="text-[9px] sm:text-[10px] text-white/50 font-bold uppercase tracking-widest text-center mt-3">
+              Respuesta en menos de 5 minutos
+            </p>
           </div>
 
           {/* Texto de Urgencias centrado */}
