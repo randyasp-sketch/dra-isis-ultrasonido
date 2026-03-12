@@ -112,6 +112,12 @@ export default function Home() {
             RESERVAR CITA
           </Button>
         </div>
+        <Link 
+  href="/facturacion" 
+  className="hidden sm:inline-flex items-center justify-center rounded-2xl px-6 py-2.5 text-xs font-bold bg-white text-[#2A5368] border border-gray-200 hover:bg-[#2A5368] hover:text-white transition-all duration-300 shadow-sm"
+>
+  FACTURACIÓN
+</Link>
       </header>
 
       {/* HERO */}
