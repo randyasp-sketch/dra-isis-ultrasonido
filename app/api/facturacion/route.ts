@@ -1,10 +1,10 @@
 import { NextResponse } from 'next/server';
 import { Resend } from 'resend';
 
-// Inicializamos Resend con tu llave de GENEM
-const resend = new Resend(process.env.RESEND_API_KEY);
-
 export async function POST(request: Request) {
+  // LO MOVIMOS AQUÍ ADENTRO: Así Vercel no se confunde al compilar
+  const resend = new Resend(process.env.RESEND_API_KEY);
+
   try {
     const formData = await request.formData();
     
@@ -47,7 +47,7 @@ export async function POST(request: Request) {
       to: process.env.EMAIL_DESTINO as string,
       replyTo: email,
       subject: `Nueva Solicitud de Factura - ${rfc}`,
-      attachments: attachments, // ¡Aquí metemos los archivos!
+      attachments: attachments,
       html: `
         <div style="font-family: sans-serif; color: #333; max-w: 600px; margin: 0 auto; border: 1px solid #eaeaea; border-radius: 10px; padding: 20px;">
           <h2 style="color: #2A5368; margin-top: 0;">Nueva solicitud de factura médica</h2>
