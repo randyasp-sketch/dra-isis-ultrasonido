@@ -16,7 +16,24 @@ export default function RootLayout({
   return (
     <html lang="es">
       <head>
-        {/* Google Tag Manager - Mantenemos tu funcionalidad de tracking */}
+        {/* --- NUEVO: GOOGLE ANALYTICS 4 --- */}
+        <Script
+          strategy="afterInteractive"
+          src={`https://www.googletagmanager.com/gtag/js?id=G-06FWXH9N7R`}
+        />
+        <Script
+          id="google-analytics"
+          strategy="afterInteractive"
+        >
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-06FWXH9N7R');
+          `}
+        </Script>
+
+        {/* --- EXISTENTE: Google Tag Manager --- */}
         <Script
           id="gtm-script"
           strategy="afterInteractive"
