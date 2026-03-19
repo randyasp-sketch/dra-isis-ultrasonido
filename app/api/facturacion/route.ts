@@ -39,7 +39,7 @@ export async function POST(request: Request) {
 
     try {
       // Reemplaza esto con la URL real de tu Firebase Function
-      const webhookURL = 'https://console.firebase.google.com/project/genem-taskflow-pro/overview'; 
+      const webhookURL = 'https://us-central1-genem-taskflow-pro.cloudfunctions.net/webhookNuevaFactura'; 
       
       await fetch(webhookURL, {
         method: 'POST',
